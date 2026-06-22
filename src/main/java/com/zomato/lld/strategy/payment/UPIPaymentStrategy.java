@@ -1,4 +1,4 @@
-package com.zomato.lld.strategy;
+package com.zomato.lld.strategy.payment;
 
 public class UPIPaymentStrategy implements PaymentStrategy {
     private String upiId;

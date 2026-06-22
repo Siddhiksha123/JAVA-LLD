@@ -1,6 +1,6 @@
 package com.zomato.lld.services;
 
-import com.zomato.lld.strategy.PaymentStrategy;
+import com.zomato.lld.strategy.payment.PaymentStrategy;
 
 public class PaymentService {
 
