@@ -7,7 +7,7 @@ public class Order {
     private User user;
     private Restaurant restaurant;
     private List<MenuItem> items;
-    private String status; 
+    private OrderStatus status; 
     private double totalAmount;
 
     public Order(String orderId, User user, Restaurant restaurant, List<MenuItem> items) {
@@ -15,7 +15,7 @@ public class Order {
         this.user = user;
         this.restaurant = restaurant;
         this.items = items;
-        this.status = "PLACED"; // default
+        this.status = OrderStatus.PLACED; // default
         this.totalAmount = calculateTotal(items);
     }
 
@@ -44,13 +44,13 @@ public class Order {
     public List<MenuItem> getItems() { return items; }
     public void setItems(List<MenuItem> items) { this.items = items; }
 
-    public String getStatus() { return status; }
+    public OrderStatus getStatus() { return status; }
     
    
-    public void markPreparing() { this.status = "PREPARING"; }
-    public void markOutForDelivery() { this.status = "OUT_FOR_DELIVERY"; }
-    public void markDelivered() { this.status = "DELIVERED"; }
-    public void markCancelled() { this.status = "CANCELLED"; }
+    public void markPreparing() { this.status = OrderStatus.PREPARING; }
+    public void markOutForDelivery() { this.status = OrderStatus.OUT_FOR_DELIVERY; }
+    public void markDelivered() { this.status = OrderStatus.DELIVERED; }
+    public void markCancelled() { this.status = OrderStatus.CANCELLED; }
 
     public double getTotalAmount() {
         return totalAmount;
