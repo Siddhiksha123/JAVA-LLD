@@ -5,10 +5,8 @@ import com.zomato.lld.models.Order;
 import com.zomato.lld.models.Restaurant;
 import com.zomato.lld.models.User;
 import com.zomato.lld.services.OrderService;
-import com.zomato.lld.strategy.payment.CashOnDeliveryStrategy;
-import com.zomato.lld.strategy.payment.CreditCardPaymentStrategy;
 import com.zomato.lld.strategy.payment.PaymentStrategy;
-import com.zomato.lld.strategy.payment.UPIPaymentStrategy;
+import com.zomato.lld.factory.PaymentStrategyFactory;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -33,15 +31,7 @@ public class Main {
 
         // Simulate frontend input for Order 1
         String userInput1 = "UPI";
-        PaymentStrategy strategy1 = null;
-        
-        if (userInput1.equals("UPI")) {
-            strategy1 = new UPIPaymentStrategy("swati@upi");
-        } else if (userInput1.equals("COD")) {
-            strategy1 = new CashOnDeliveryStrategy(order1.getTotalAmount());
-        } else if (userInput1.equals("CREDIT_CARD")) {
-            strategy1 = new CreditCardPaymentStrategy();
-        }
+        PaymentStrategy strategy1 = PaymentStrategyFactory.getPaymentStrategy(userInput1, order1.getTotalAmount());
         
         orderService.placeOrder(order1, strategy1);
 
@@ -50,15 +40,7 @@ public class Main {
         
         // Simulate frontend input for Order 2
         String userInput2 = "COD";
-        PaymentStrategy strategy2 = null;
-        
-        if (userInput2.equals("UPI")) {
-            strategy2 = new UPIPaymentStrategy("swati@upi");
-        } else if (userInput2.equals("COD")) {
-            strategy2 = new CashOnDeliveryStrategy(order2.getTotalAmount());
-        } else if (userInput2.equals("CREDIT_CARD")) {
-            strategy2 = new CreditCardPaymentStrategy();
-        }
+        PaymentStrategy strategy2 = PaymentStrategyFactory.getPaymentStrategy(userInput2, order2.getTotalAmount());
         
         orderService.placeOrder(order2, strategy2);
 
