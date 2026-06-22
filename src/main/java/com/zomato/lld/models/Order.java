@@ -7,7 +7,7 @@ public class Order {
     private User user;
     private Restaurant restaurant;
     private List<MenuItem> items;
-    private String status; // Changed from OrderStatus to String
+    private String status; 
     private double totalAmount;
 
     public Order(String orderId, User user, Restaurant restaurant, List<MenuItem> items) {
@@ -15,7 +15,7 @@ public class Order {
         this.user = user;
         this.restaurant = restaurant;
         this.items = items;
-        this.status = "PLACED"; // Changed to String
+        this.status = "PLACED"; // default
         this.totalAmount = calculateTotal(items);
     }
 
@@ -46,7 +46,7 @@ public class Order {
 
     public String getStatus() { return status; }
     
-    // Replacing generic setter with domain-specific methods
+   
     public void markPreparing() { this.status = "PREPARING"; }
     public void markOutForDelivery() { this.status = "OUT_FOR_DELIVERY"; }
     public void markDelivered() { this.status = "DELIVERED"; }
