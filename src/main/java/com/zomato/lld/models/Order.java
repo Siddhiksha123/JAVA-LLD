@@ -1,0 +1,58 @@
+package com.zomato.lld.models;
+
+import java.util.List;
+
+public class Order {
+    private String orderId;
+    private User user;
+    private Restaurant restaurant;
+    private List<MenuItem> items;
+    private OrderStatus status; 
+    private double totalAmount;
+
+    public Order(String orderId, User user, Restaurant restaurant, List<MenuItem> items) {
+        this.orderId = orderId;
+        this.user = user;
+        this.restaurant = restaurant;
+        this.items = items;
+        this.status = OrderStatus.PLACED; // default
+        this.totalAmount = calculateTotal(items);
+    }
+
+    private double calculateTotal(List<MenuItem> items) {
+        if (items == null) {
+            return 0;
+        }
+        
+        double total = 0;
+        for (MenuItem item : items) {
+            total += item.getPrice();
+        }
+        
+        return total;
+    }
+
+    public String getOrderId() { return orderId; }
+    public void setOrderId(String orderId) { this.orderId = orderId; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public Restaurant getRestaurant() { return restaurant; }
+    public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
+
+    public List<MenuItem> getItems() { return items; }
+    public void setItems(List<MenuItem> items) { this.items = items; }
+
+    public OrderStatus getStatus() { return status; }
+    
+   
+    public void markPreparing() { this.status = OrderStatus.PREPARING; }
+    public void markOutForDelivery() { this.status = OrderStatus.OUT_FOR_DELIVERY; }
+    public void markDelivered() { this.status = OrderStatus.DELIVERED; }
+    public void markCancelled() { this.status = OrderStatus.CANCELLED; }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+}
